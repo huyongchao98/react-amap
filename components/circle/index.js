@@ -19,12 +19,12 @@ const configurableProps = [
   /* 原生的接口中并没有这些对象，这是本组件的扩展 */
   'visible',
   'style'
-]
+];
 
 const allProps = configurableProps.concat([
   'zIndex',
   'bubble'
-])
+]);
 
 type CircleProps = {
   __map__: Object,
@@ -40,7 +40,7 @@ type CircleProps = {
   bubble: boolean,
   events?: Object,
   children: any,
-}
+};
 
 class Circle extends React.Component<CircleProps, {loaded: boolean}> {
 

@@ -1,5 +1,4 @@
 var path = require('path');
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var webpackConfig = {
   entry: './components/',
@@ -13,12 +12,12 @@ var webpackConfig = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.jsx?$/,
+        test: /\.js$|\.jsx$/,
         include: path.resolve(__dirname, 'components'),
         exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'eslint-loader'
       }, {
-        test: /\.jsx?$/,
+        test: /\.js$|\.jsx$/,
         loader: 'babel-loader',
         include: path.resolve(__dirname, 'components'),
         exclude: path.resolve(__dirname, 'node_modules')

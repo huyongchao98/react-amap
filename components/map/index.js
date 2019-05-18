@@ -227,7 +227,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
   }
 
   setPlugins(props: MapProps) {
-    const pluginList = ['Scale', 'ToolBar', 'MapType', 'OverView', 'ControlBar']
+    const pluginList = ['Scale', 'ToolBar', 'MapType', 'OverView', 'ControlBar', 'Autocomplete']
     if ('plugins' in props) {
       const plugins = props.plugins
       if (plugins && plugins.length) {
@@ -281,6 +281,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
       case 'ToolBar':
       case 'OverView':
       case 'MapType':
+      case 'Autocomplete':
         this.setMapPlugin(name, opts)
         break
       case 'ControlBar':
@@ -298,8 +299,13 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
       const { onCreated, ...restOpts } = opts
       const initOpts = {...defaultOpts[name], ...restOpts}
       this.map.plugin([`AMap.${name}`], () => {
-        this.pluginMap[name] = new window.AMap[name](initOpts)
-        this.map.addControl(this.pluginMap[name])
+        console.log(initOpts);
+        const plugin = new window.AMap[name](initOpts)
+        this.pluginMap[name] = plugin
+        console.log(plugin)
+        if (name !== 'Autocomplete') {
+          this.map.addControl(this.pluginMap[name])
+        }
         if (isFun(onCreated)) {
           onCreated(this.pluginMap[name])
         }
@@ -326,9 +332,9 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
   render() {
     return (<div style={wrapperStyle}>
       <div ref={(div)=>{ this.mapWrapper = div }} style={containerStyle}>
-      {
-        this.state.mapLoaded ? null : this.props.loading || null
-      }
+        {
+          this.state.mapLoaded ? null : this.props.loading || null
+        }
       </div>
       <div>{ this.state.mapLoaded ? this.renderChildren() : null }</div>
     </div>)

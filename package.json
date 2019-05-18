@@ -6,7 +6,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "lint": "eslint . --quiet",
-    "browser-build": "rm -rf dist && webpack && NODE_ENV=production webpack -p",
+    "browser-build": "rm -rf dist && webpack && NODE_ENV=development webpack -p",
     "npm-build": "rm -rf lib && babel components -d lib",
     "site": "npm run npm-build && bisheng build",
     "deploy": "npm run npm-build && bisheng gh-pages",

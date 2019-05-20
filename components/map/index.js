@@ -5,6 +5,7 @@ import isFun from '../utils/isFun'
 import log from '../utils/log'
 import { toLnglat } from '../utils/common'
 import withPropsReactive from '../utils/withPropsReactive'
+import addListener from '../utils/eventsUitl'
 
 const Component = React.Component
 const Children = React.Children
@@ -294,21 +295,20 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
 
   setMapPlugin(name: string, opts: Object) {
     if (this.pluginMap[name]) {
-      this.pluginMap[name].show()
+      if (this.pluginMap[name].show) {
+        this.pluginMap[name].show()
+      }
     } else {
-      const { onCreated, ...restOpts } = opts
+      const { ...restOpts } = opts
       const initOpts = {...defaultOpts[name], ...restOpts}
       this.map.plugin([`AMap.${name}`], () => {
-        console.log(initOpts);
         const plugin = new window.AMap[name](initOpts)
         this.pluginMap[name] = plugin
-        console.log(plugin)
         if (name !== 'Autocomplete') {
           this.map.addControl(this.pluginMap[name])
         }
-        if (isFun(onCreated)) {
-          onCreated(this.pluginMap[name])
-        }
+        console.log(name);
+        addListener(plugin, opts);
       })
     }
   }

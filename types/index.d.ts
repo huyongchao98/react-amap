@@ -1,3 +1,4 @@
+import { ObjSize } from './index.d';
 /// <reference types="react" />
 import * as React from 'react';
 
@@ -211,6 +212,7 @@ export interface MouseToolProps {
   events?: EventMap;
 }
 
+
 export class Map extends React.Component<MapProps, {mapLoaded: boolean}> {}
 
 export class Marker extends React.Component<MarkerProps, {}> {}
@@ -232,3 +234,5 @@ export class GroundImage extends React.Component<GroungImageProps, {}> {}
 export class InfoWindow extends React.Component<InfoWindowProps, {}> {}
 
 export class MouseTool extends React.Component<MouseToolProps, {}> {}
+
+export class PlaceSearch extends React.Component<PlaceSearchProps, {}> {}

@@ -9,8 +9,10 @@ import GroundImage from './groundimage';
 import CircleEditor from './circleeditor';
 import PolyEditor from './polyeditor';
 import MouseTool from './mousetool';
+import PlaceSearch from './placesearch';
 
 export {
+  PlaceSearch,
   Map,
   Markers,
   Circle,
@@ -25,6 +27,7 @@ export {
 };
 
 export default {
+  PlaceSearch,
   Map,
   Markers,
   Circle,

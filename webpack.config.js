@@ -40,5 +40,4 @@ var webpackConfig = {
   }
 };
 
-
 module.exports = webpackConfig;

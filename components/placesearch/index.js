@@ -88,8 +88,7 @@ class PlaceSearch extends React.Component <PlaceSearchProps, {}> {
       'panel',
       'showCover',
       'renderStyle',
-      'autoFitView',
-      'events'
+      'autoFitView'
     ];
 
     allPlaceSearchOptions.forEach((key) => {

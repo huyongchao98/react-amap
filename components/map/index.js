@@ -106,6 +106,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
     this.state = {
       mapLoaded: false
     }
+    console.log('12112');
     const self = this
     this.setterMap = {
       zoom(val) {

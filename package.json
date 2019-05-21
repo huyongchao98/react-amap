@@ -7,11 +7,15 @@
   "scripts": {
     "lint": "eslint . --quiet",
     "browser-build": "rm -rf dist && webpack && NODE_ENV=production webpack -p",
+    "browser-build_d": "rm -rf dist && webpack && NODE_ENV=development webpack -d",
     "npm-build": "rm -rf lib && babel components -d lib",
+    "npm-build_dev": "rm -rf lib && babel components --watch -d lib --source-maps inline",
+    "buildAll": "npm run browser-build && npm run npm-build",
+    "buildAll_dev": "npm run browser-build_dev && npm run npm-build_dev",
     "site": "npm run npm-build && bisheng build",
     "deploy": "npm run npm-build && bisheng gh-pages",
     "start": "npm run npm-build && bisheng start",
-    "prepublish": "npm run browser-build && npm run npm-build",
+    "prepublish": "if [[ ${NODE_ENV} == \"development\" ]]; then  echo ${NODE_ENV} npm run buildAll_dev; else echo ${NODE_ENV}   npm run buildAll; fi",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "author": "ohislh@gmail.com",

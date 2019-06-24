@@ -212,6 +212,32 @@ export interface MouseToolProps {
   events?: EventMap;
 }
 
+export interface  PlaceSearchEvent {
+  onCreated: Function,
+  complete: Function,
+  error: Function,
+  selectChanged: Function,
+  listElementClick: Function,
+  markerClick: Function,
+}
+
+export interface PlaceSearchProps {
+  city?: string;
+  citylinit?: boolean;
+  children?: number;
+  type?: string;
+  lang?: string;
+  pageSize?: number;
+  pageIndex?: number;
+  extensions?: string;
+  map?: object;
+  panel?: string | object;
+  showCover?: boolean;
+  renderStyle?: string;
+  autoFitView?: boolean;
+  events?: PlaceSearchEvent;
+}
+
 
 export class Map extends React.Component<MapProps, {mapLoaded: boolean}> {}
 

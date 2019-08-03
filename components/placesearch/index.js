@@ -4,7 +4,7 @@ import log from '../utils/log'
 import withPropsReactive from '../utils/withPropsReactive'
 import addListener from '../utils/eventsUitl'
 
-type PlaceSearchProps {
+type PlaceSearchProps = {
   city?: string;
   citylinit?: boolean;
   children?: number;
@@ -13,26 +13,29 @@ type PlaceSearchProps {
   pageSize?: number;
   pageIndex?: number;
   extensions?: string;
-  map?: object;
-  panel?: string | object;
+  map?: Object;
+  panel?: string | Object;
   showCover?: boolean;
   renderStyle?: string;
   autoFitView?: boolean;
   events?: PlaceSearchEvent;
+  __map__: Object;
 }
 
-type PlaceSearchEvent {
-  onCreated: func,
-  complete: func,
-  error: func,
-  selectChanged: func,
-  listElementClick: func,
-  markerClick: func,
+type PlaceSearchEvent = {
+  onCreated: Function,
+  complete: Function,
+  error: Function,
+  selectChanged: Function,
+  listElementClick: Function,
+  markerClick: Function,
 }
 
 export class PlaceSearch extends React.Component <PlaceSearchProps, {}> {
   map: Object
   placeSearch: Object
+  element: Object
+  setterMap: Function
 
   constructor(props: PlaceSearchProps) {
     super(props);

@@ -97,7 +97,7 @@ const ClusterProps = [
 
 const IdKey = '__react_amap__';
 
-type MarkerDOM = HTMLDivElement & { markerRef: Object };
+type MarkerDOM = HTMLDivElement & {markerRef: Object };
 /*
  * props
  * {
@@ -119,7 +119,7 @@ class Markers extends Component<MarkerProps, {}> {
   hoverOffset: Object;
   markersWindow: Object;
   mapCluster: Object;
-  markersDOM: MarkerDOM;
+  markersDOM: MarkerDOM | HTMLDivElement;
   markerReactChildDOM: any;
 
   constructor(props: MarkerProps) {
@@ -217,7 +217,7 @@ class Markers extends Component<MarkerProps, {}> {
   }
 
   setMarkerChild() {
-    Object.keys(this.markerReactChildDOM).forEach((idx) => {
+    Object.keys(this.markerReactChildDOM).forEach((_, idx) => {
       const dom = this.markersCache[idx].getContent();
       const child = this.markerReactChildDOM[idx];
       this.renderMarkerChild(dom, child);
@@ -432,10 +432,10 @@ class Markers extends Component<MarkerProps, {}> {
       }
       markers.forEach((m) => {
         const contentDOM = m.getContent();
-        const itemDOM: MarkerDOM = document.createElement('div');
+        const div: HTMLDivElement = document.createElement('div');
+        const itemDOM: MarkerDOM = { ...div, markerRef: m };
         itemDOM.className = 'window_marker_item';
         itemDOM.appendChild(contentDOM);
-        itemDOM.markerRef = m;
         itemDOM.addEventListener('click', this.onWindowMarkerClick.bind(this, itemDOM), true);
         itemDOM.addEventListener('mouseover', this.onWindowMarkerHover.bind(this, itemDOM), true);
         itemDOM.addEventListener('mouseout', this.onWindowMarkerHoverOut.bind(this, itemDOM), true);

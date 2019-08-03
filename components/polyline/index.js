@@ -36,7 +36,7 @@ type LineProps = {
   __ele__: HTMLElement,
   __map__: Object,
   events: Object,
-  children: React.Node,
+  children: Object,
 }
 
 class Polyline extends Component<LineProps, {loaded: boolean}> {

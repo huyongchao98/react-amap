@@ -142,7 +142,7 @@ class Polygon extends Component<PolyProps, {loaded: boolean}> {
       if ('longitude' in firstNode || 'lng' in firstNode) {
         return path.map((p) => (toLnglat(p)))
       }
-      if ('length' in firstNode && firstNode.length) {
+      if (typeof firstNode === 'object') {
         // $FlowFixMe
         return path.map(ring => this.buildPathValue(ring))
       }

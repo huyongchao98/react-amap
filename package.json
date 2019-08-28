@@ -46,7 +46,7 @@
     "bisheng-plugin-antd": "1.2.9",
     "bisheng-plugin-react": "^1.1.0",
     "css-loader": "^3.1.0",
-    "eslint": "^6.1.0",
+    "eslint": "^6.2.2",
     "eslint-config-elemefe": "^0.3.0",
     "eslint-loader": "^2.2.1",
     "eslint-plugin-flowtype": "^3.12.2",

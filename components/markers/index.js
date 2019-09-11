@@ -97,7 +97,7 @@ const ClusterProps = [
 
 const IdKey = '__react_amap__';
 
-type MarkerDOM = {|...HTMLDivElement|}&{markerRef: Object };
+type MarkerDOM = {| ...HTMLDivElement |} & {markerRef: Object };
 /*
  * props
  * {
@@ -432,7 +432,7 @@ class Markers extends Component<MarkerProps, {}> {
       }
       markers.forEach((m) => {
         const contentDOM = m.getContent();
-        const theDiv:HTMLDivElement = document.createElement('div');
+        const theDiv: HTMLDivElement = document.createElement('div');
         const itemDOM: MarkerDOM = { ...theDiv, markerRef: m };
         itemDOM.className = 'window_marker_item';
         itemDOM.appendChild(contentDOM);

@@ -102,7 +102,7 @@ class InfoWindow extends Component<IWProps, {}> {
     return false
   }
 
-  componentWillReceiveProps(nextProps: IWProps) {
+  componentDidUpdate(nextProps: IWProps) {
     if (this.map) {
       this.refreshWindowLayout(nextProps)
     }

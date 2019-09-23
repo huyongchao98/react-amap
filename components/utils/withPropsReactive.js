@@ -40,7 +40,7 @@ function withPropsReactive(MapComponent) {
       })
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
       this.reactivePropChange(nextProps, true)
     }
 

@@ -250,7 +250,7 @@ class Markers extends Component<MarkerProps, {}> {
     return result;
   }
 
-  componentWillReceiveProps(nextProps: MarkerProps) {
+  componentDidUpdate(nextProps: MarkerProps) {
     if (this.map) {
       this.refreshMarkersLayout(nextProps);
     }

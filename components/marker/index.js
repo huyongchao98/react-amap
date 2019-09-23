@@ -61,7 +61,7 @@ class Marker extends React.Component<MarkerProps, {}> {
     return false
   }
 
-  componentWillReceiveProps(nextProps: MarkerProps) {
+  componentDidUpdate(nextProps: MarkerProps) {
     if (this.map) {
       this.refreshMarkerLayout(nextProps)
     }

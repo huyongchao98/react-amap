@@ -144,7 +144,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
     return this.map
   }
 
-  componentWillReceiveProps(nextProps: MapProps) {
+  componentDidUpdate(nextProps: MapProps) {
     if (this.state.mapLoaded) {
       this.updateMapProps(this.props, nextProps)
     }

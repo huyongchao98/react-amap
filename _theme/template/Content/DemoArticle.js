@@ -11,7 +11,7 @@ export default class DemoArticle extends React.Component {
     this.changeLayout = this.changeLayout.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.changeLayout();
     window.addEventListener('resize', this.changeLayout);
   }

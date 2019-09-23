@@ -34,7 +34,7 @@ class CircleEditor extends React.Component<EditorProps, {}> {
     }
   }
 
-  componentWillReceiveProps(nextProps: EditorProps) {
+  componentDidUpdate(nextProps: EditorProps) {
     if (this.map) {
       this.onPropsUpdate(nextProps)
     }

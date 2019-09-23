@@ -23,7 +23,7 @@ export default class SideMenu extends React.Component {
       mode
     });
   }
-  componentWillMount() {
+  componentDidMount() {
     this.changeMenuLayout();
     window.addEventListener('resize', this.changeMenuLayout);
   }

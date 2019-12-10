@@ -1,4 +1,3 @@
-import { ObjSize } from './index.d';
 /// <reference types="react" />
 import * as React from 'react';
 

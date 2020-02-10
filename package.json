@@ -15,7 +15,7 @@
     "site": "npm run npm-build && bisheng build",
     "deploy": "npm run npm-build && bisheng gh-pages",
     "start": "npm run npm-build && bisheng start",
-    "prepublish": "if [ \"${NODE_ENV}\" = \"development\" ]; then  echo ${NODE_ENV} \n npm run buildAll_dev; else echo ${NODE_ENV} \n npm run buildAll; fi",
+    "prepublish": "if [ \"${NODE_ENV}\" = \"development\" ]; then  echo \"tests11\" \n npm run buildAll_dev; else echo \"tests22\" \n npm run buildAll; fi",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "author": "ohislh@gmail.com",

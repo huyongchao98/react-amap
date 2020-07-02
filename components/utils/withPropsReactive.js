@@ -40,14 +40,15 @@ function withPropsReactive(MapComponent) {
       })
     }
 
-    componentDidUpdate(nextProps) {
-      this.reactivePropChange(nextProps, true)
+    componentDidUpdate(prevProps) {
+      this.reactivePropChange(prevProps, true)
     }
 
-    reactivePropChange(nextProps, shouldDetectChange = true) {
+    reactivePropChange(prevProps, shouldDetectChange = true) {
       if (!this.instanceCreated) {
         return false
       }
+      const nextProps = this.props
       const { setterMap = {}, converterMap = {}, instance = {} } = this.myMapComponent
       const list = Object.keys(nextProps)
       list.length && list.forEach(key => {
@@ -57,7 +58,7 @@ function withPropsReactive(MapComponent) {
 
         let willReactive = true
         if (shouldDetectChange) {
-          willReactive = this.detectPropChange(key, nextProps, this.props)
+          willReactive = this.detectPropChange(key, prevProps, nextProps)
         }
         if (!willReactive) {
           return false

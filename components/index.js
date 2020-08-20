@@ -10,6 +10,7 @@ import CircleEditor from './circleeditor';
 import PolyEditor from './polyeditor';
 import MouseTool from './mousetool';
 import PlaceSearch from './placesearch';
+import DragRoute from './dragRoute';
 
 export {
   PlaceSearch,
@@ -23,7 +24,8 @@ export {
   InfoWindow,
   GroundImage,
   Marker,
-  MouseTool
+  MouseTool,
+  DragRoute
 };
 
 export default {
@@ -38,5 +40,6 @@ export default {
   InfoWindow,
   GroundImage,
   Marker,
-  MouseTool
+  MouseTool,
+  DragRoute
 };

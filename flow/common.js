@@ -18,6 +18,15 @@ declare type AMapSize = {
   getHeight: Function,
 };
 
+const DrivingPolicies = {
+  LEAST_TIME: 'LEAST_TIME',
+  LEAST_FEE: 'LEAST_FEE',
+  LEAST_DISTANCE: 'LEAST_DISTANCE',
+  REAL_TRAFFIC:'REAL_TRAFFIC',
+};
+
+declare type DrivingPolicy = $Keys<typeof DrivingPolicies>;
+
 declare type PureSize = {
   width: number,
   height: number,

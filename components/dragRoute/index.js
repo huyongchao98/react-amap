@@ -13,14 +13,14 @@ type DragRouteProps = {
 }
 
 type DragRouteEvent = {
- complete: Function,
- addway:Function,
+  complete: Function;
+  addway: Function;
 }
 
-export class DragRoute extends React.Component <DragRouteProps,{}> {
+export class DragRoute extends React.Component <DragRouteProps, {}> {
   map: Object
   setterMap: Function
-  dragRoute:Object
+  dragRoute: Object
   element: Object
   constructor(props: DragRouteProps) {
     super(props);
@@ -53,7 +53,7 @@ export class DragRoute extends React.Component <DragRouteProps,{}> {
    createDragRoute(props: DragRouteProps) {
 
     this.map.plugin(['AMap.DragRoute'], () => {
-      this.dragRoute = new window.AMap.DragRoute(this.map,this.props.initPaths,this.props.drivingPolicy);
+      this.dragRoute = new window.AMap.DragRoute(this.map, this.props.initPaths, this.props.drivingPolicy);
       addListener(this.dragRoute, props);
       this.dragRoute.search();
     })

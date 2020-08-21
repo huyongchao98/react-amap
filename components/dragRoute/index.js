@@ -58,7 +58,9 @@ export class DragRoute extends React.Component <DragRouteProps, {}> {
    createDragRoute(props: DragRouteProps) {
 
     this.map.plugin(['AMap.DragRoute'], () => {
+      console.log('1212');
       this.dragRoute = new window.AMap.DragRoute(this.map, this.props.initPaths, this.props.drivingPolicy);
+      console.log(this.dragRoute);
       addListener(this.dragRoute, props);
       this.dragRoute.search();
     })

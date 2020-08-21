@@ -7,6 +7,7 @@ import addListener from '../utils/eventsUitl'
 
 type DragRouteProps = {
   __map__: Object;
+  map?: Object;
   initPaths: Array<Object>;
   drivingPolicy: DrivingPolicy;
   events?: DragRouteEvent;
@@ -50,6 +51,10 @@ export class DragRoute extends React.Component <DragRouteProps, {}> {
     }
   }
 
+  render() {
+    return null
+  }
+
    createDragRoute(props: DragRouteProps) {
 
     this.map.plugin(['AMap.DragRoute'], () => {
@@ -59,8 +64,6 @@ export class DragRoute extends React.Component <DragRouteProps, {}> {
     })
   }
 
-
 }
-
 
 export default withPropsReactive(DragRoute);

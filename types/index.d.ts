@@ -3,7 +3,12 @@ import * as React from 'react';
 
 export type EventMap = Object;
 
-export type PluginList = 'Scale' | 'ToolBar' | 'MapType' | 'OverView' | 'ControlBar'
+export type PluginList =
+  | 'Scale'
+  | 'ToolBar'
+  | 'MapType'
+  | 'OverView'
+  | 'ControlBar';
 
 export interface PluginConfig {
   name: PluginList;
@@ -29,7 +34,10 @@ export interface AMapLngLat {
 }
 export type LngLat = ArrayLngLat | LngLatPos | FullLngLatPos | AMapLngLat;
 
-export type Path = Array<ArrayLngLat> | Array<FullLngLatPos> | Array<AMapLngLat>;
+export type Path =
+  | Array<ArrayLngLat>
+  | Array<FullLngLatPos>
+  | Array<AMapLngLat>;
 
 export type PolygonPath = Path | [Path, Path];
 
@@ -66,10 +74,10 @@ export interface MapProps {
   useAMapUI?: boolean | Function;
   children?: any;
   onInstanceCreated?: Function;
-  plugins?: Array<PluginList|PluginConfig>;
+  plugins?: Array<PluginList | PluginConfig>;
   events?: EventMap;
   loading?: any;
-  viewMode?: '2D'|'3D';
+  viewMode?: '2D' | '3D';
   center?: LngLat;
   zoom?: number;
   zooms?: [number, number];
@@ -211,13 +219,13 @@ export interface MouseToolProps {
   events?: EventMap;
 }
 
-export interface  PlaceSearchEvent {
-  onCreated: Function,
-  complete: Function,
-  error: Function,
-  selectChanged: Function,
-  listElementClick: Function,
-  markerClick: Function,
+export interface PlaceSearchEvent {
+  onCreated: Function;
+  complete: Function;
+  error: Function;
+  selectChanged: Function;
+  listElementClick: Function;
+  markerClick: Function;
 }
 
 export interface PlaceSearchProps {
@@ -237,8 +245,19 @@ export interface PlaceSearchProps {
   events?: PlaceSearchEvent;
 }
 
+export interface DragRouteEvent {
+  complete: Function;
+  addway: Function;
+}
 
-export class Map extends React.Component<MapProps, {mapLoaded: boolean}> {}
+export interface DragRouteProps {
+  map?: Object;
+  initPaths: Array<Object>;
+  drivingPolicy: string;
+  events?: DragRouteEvent;
+}
+
+export class Map extends React.Component<MapProps, { mapLoaded: boolean }> {}
 
 export class Marker extends React.Component<MarkerProps, {}> {}
 
@@ -261,3 +280,5 @@ export class InfoWindow extends React.Component<InfoWindowProps, {}> {}
 export class MouseTool extends React.Component<MouseToolProps, {}> {}
 
 export class PlaceSearch extends React.Component<PlaceSearchProps, {}> {}
+
+export class DragRoute extends React.Component<DragRouteProps, {}> {}

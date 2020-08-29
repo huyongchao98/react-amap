@@ -10,6 +10,7 @@ type DragRouteProps = {
   map?: Object;
   initPaths: Array<Object>;
   drivingPolicy: DrivingPolicy;
+  opts: Object;
   events?: DragRouteEvent;
 }
 
@@ -56,10 +57,10 @@ export class DragRoute extends React.Component <DragRouteProps, {}> {
   }
 
    createDragRoute(props: DragRouteProps) {
-
+   const {opts} = props;
     this.map.plugin(['AMap.DragRoute'], () => {
       console.log('1212');
-      this.dragRoute = new window.AMap.DragRoute(this.map, this.props.initPaths, this.props.drivingPolicy);
+      this.dragRoute = new window.AMap.DragRoute(this.map, this.props.initPaths, this.props.drivingPolicy,opts);
       console.log(this.dragRoute);
       addListener(this.dragRoute, props);
       this.dragRoute.search();

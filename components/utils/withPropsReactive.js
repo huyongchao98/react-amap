@@ -45,7 +45,7 @@ function withPropsReactive(MapComponent) {
     }
 
     reactivePropChange(prevProps, shouldDetectChange = true) {
-      if (!this.instanceCreated) {
+      if (!this.instanceCreated || this.myMapComponent == null) {
         return false
       }
       const nextProps = this.props

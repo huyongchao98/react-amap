@@ -204,7 +204,7 @@ class Markers extends Component<MarkerProps, {}> {
         const markers = this.mapCluster.getMarkers();
         this.mapCluster.clearMarkers();
         markers.forEach((marker) => {
-          marker.setMap(this.map);
+          this.map.add(marker)
         });
       }
     }

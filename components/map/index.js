@@ -229,7 +229,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
   }
 
   setPlugins(props: MapProps) {
-    const pluginList = ['Scale', 'ToolBar', 'MapType', 'OverView', 'ControlBar', 'Autocomplete']
+    const pluginList = ['Scale', 'ToolBar', 'MapType', 'OverView', 'ControlBar', 'AutoComplete']
     if ('plugins' in props) {
       const plugins = props.plugins
       if (plugins && plugins.length) {
@@ -302,10 +302,11 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
     } else {
       const { ...restOpts } = opts
       const initOpts = {...defaultOpts[name], ...restOpts}
-      this.map.plugin([`AMap.${name}`], () => {
+      window.AMap.plugin([`AMap.${name}`], () => {
+
         const plugin = new window.AMap[name](initOpts)
         this.pluginMap[name] = plugin
-        if (name !== 'Autocomplete') {
+        if (name !== 'AutoComplete') {
           this.map.addControl(this.pluginMap[name])
         }
         console.log(name);
@@ -320,7 +321,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
     } else {
       const { onCreated, ...restOpts } = opts
       const initOpts = {...defaultOpts.ControlBar, ...restOpts}
-      this.map.plugin(['AMap.ControlBar'], () => {
+       window.AMap.plugin(['AMap.ControlBar'], () => {
         this.pluginMap.ControlBar = new window.AMap.ControlBar(initOpts)
         this.map.addControl(this.pluginMap.ControlBar)
         if (isFun(onCreated)) {

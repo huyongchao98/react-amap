@@ -12,7 +12,7 @@ const addListener = (amapPlugin, props) => {
       const keys = Object.keys(restEvents);
       console.log(keys);
       keys.forEach((key) => {
-        window.AMap.event.addListener(amapPlugin, key, restEvents[key])
+        amapPlugin.on(key, restEvents[key]);
       })
     }
   }

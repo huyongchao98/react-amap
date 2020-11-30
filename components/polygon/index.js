@@ -120,7 +120,6 @@ class Polygon extends Component<PolyProps, {loaded: boolean}> {
   }
 
   detectPropChanged(key: string, nextProps: PolyProps) {
-    console.log(key)
     return this.props[key] !== nextProps[key]
   }
 
@@ -132,7 +131,6 @@ class Polygon extends Component<PolyProps, {loaded: boolean}> {
   }
 
   buildPathValue(path: PolygonPath) {
-    console.log(path)
     if (path.length) {
       const firstNode = path[0]
       if (typeof firstNode[0] === 'number') {

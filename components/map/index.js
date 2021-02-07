@@ -229,7 +229,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
   }
 
   setPlugins(props: MapProps) {
-    const pluginList = ['Scale', 'ToolBar', 'MapType', 'OverView', 'ControlBar', 'Autocomplete']
+    const pluginList = ['Scale', 'ToolBar', 'MapType', 'OverView', 'ControlBar', 'AutoComplete']
     if ('plugins' in props) {
       const plugins = props.plugins
       if (plugins && plugins.length) {
@@ -283,7 +283,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
       case 'ToolBar':
       case 'OverView':
       case 'MapType':
-      case 'Autocomplete':
+      case 'AutoComplete':
         this.setMapPlugin(name, opts)
         break
       case 'ControlBar':
@@ -306,7 +306,7 @@ class BaseMap extends Component<MapProps, {mapLoaded: boolean}> {
 
         const plugin = new window.AMap[name](initOpts)
         this.pluginMap[name] = plugin
-        if (name !== 'Autocomplete') {
+        if (name !== 'AutoComplete') {
           this.map.addControl(this.pluginMap[name])
         }
         console.log(name);

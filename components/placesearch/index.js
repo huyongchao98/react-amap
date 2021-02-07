@@ -38,6 +38,7 @@ export class PlaceSearch extends React.Component <PlaceSearchProps, {}> {
   setterMap: Function
 
   constructor(props: PlaceSearchProps) {
+    console.log('PlaceSearch')
     super(props);
     if (typeof window !== 'undefined') {
       if (!props.__map__) {
@@ -66,7 +67,7 @@ export class PlaceSearch extends React.Component <PlaceSearchProps, {}> {
   }
 
   createPlaceSearch(props: PlaceSearchProps) {
-
+    console.log('createPlaceSearch')
     this.map.plugin(['AMap.PlaceSearch'], () => {
       let ops = this.buildCreateOptions(this.props);
       this.placeSearch = new window.AMap.PlaceSearch(ops);

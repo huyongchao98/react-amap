@@ -11,8 +11,10 @@ import PolyEditor from './polyeditor';
 import MouseTool from './mousetool';
 import PlaceSearch from './placesearch';
 import DragRoute from './dragRoute';
+import PolygonEditor from './PolygonEditor';
 
 export {
+  PolygonEditor,
   PlaceSearch,
   Map,
   Markers,
@@ -29,6 +31,7 @@ export {
 };
 
 export default {
+  PolygonEditor,
   PlaceSearch,
   Map,
   Markers,

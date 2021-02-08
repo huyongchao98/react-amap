@@ -71,20 +71,31 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
     if (this.polygonEditor != null) {
       const { polygon, targetIndex } = this.props
    
-      const polygonComponents = polygon?.filter(item => item.length >= 3).map(item => {
+      const polygonComponents = polygon?.filter((item, index) => item.length >= 3 || targetIndex !== index).map(item => {
         console.log('item:', item)
         return <Polygon path={item} />
       })
 
       console.log('polygon:', polygon)
       console.log('targetIndex:', targetIndex)
-      if (polygonComponents != null && polygonComponents.length > 1) {
-        this.polygonEditor.addAdsorbPolygons(polygon)
+
+      let currentPolygonComponent
+      if (targetIndex >= 0 && polygon != null && polygon.length > targetIndex && polygon[targetIndex].length >= 3) {
+        currentPolygonComponent = <Polygon path={polygon[targetIndex]} />
+      }
+      if (polygonComponents != null && polygonComponents.length >= 1) {
+        let thePolygonComponents = polygonComponents
+        if (currentPolygonComponent != null) {
+          thePolygonComponents = [currentPolygonComponent, ...polygonComponents]
+        }
+        this.polygonEditor.addAdsorbPolygons(thePolygonComponents)
       }
       if (targetIndex >= 0 && targetIndex < polygon.length) {
         const target = polygon[targetIndex]
         if (target.length === 0) {
           this.polygonEditor.setTarget()
+        } else if (currentPolygonComponent != null) {
+          this.polygonEditor.setTarget(currentPolygonComponent)
         }
         this.polygonEditor.open()
       }

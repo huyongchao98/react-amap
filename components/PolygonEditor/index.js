@@ -12,14 +12,12 @@ type EditorProps = {
   events?: Object,
   onInstanceCreated?: Function
 }
-
 class PolygonEditor extends React.Component<EditorProps, {}> {
 
   map: Object
-  polygon: Object[]
   targetIndex: number
-  editorActive: boolean
   polygonEditor: Object
+  editorActive: boolean
   setterMap: Object
 
   constructor(props: EditorProps) {
@@ -37,8 +35,6 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
         }
         this.map = props.__map__
         this.editorActive = false
-        this.polygon = props.polygon
-        this.targetInde = props.targetIndex
         this.createEditorInstance().then(() => {
           this.props.onInstanceCreated && this.props.onInstanceCreated()
         })
@@ -69,6 +65,32 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
     }
   }
 
+  componentDidUpdate() {
+    console.log('componentWillUpdate')
+    if (this.polygonEditor != null) {
+      const { polygon, targetIndex } = this.props
+      console.log('polygon:', polygon)
+      console.log('targetIndex:', targetIndex)
+      if (polygon != null && polygon.length > 1) {
+        this.polygonEditor.addAdsorbPolygons(polygon)
+      }
+      if (targetIndex >= 0 && targetIndex < polygon.length) {
+        const target = polygon[targetIndex]
+        if (target == null) {
+          return
+        }
+        const targetLength = target.getPath().length
+        if (targetLength === 0) {
+          this.polygonEditor.setTarget()
+        } else {
+          this.polygonEditor.setTarget(target)
+        }
+        this.polygonEditor.open()
+      }
+
+    }
+  }
+
   inactiveEditor() {
     this.editorActive = false
     if (this.polygonEditor) {
@@ -85,19 +107,16 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
         this.polygonEditor = new window.AMap.PolygonEditor(
           this.map
         )
-        if (this.polygon != null && this.polygon.length > 0) {
-          this.polygonEditor.addAdsorbPolygons(this.polygon)
-        }
-        if (this.targetIndex >= 0 && this.targetIndex < this.polygon.length) {
-          this.polygonEditor.setTarget(this.polygon[this.targetIndex])
-        }
         resolve(this.polygonEditor)
       })
     })
   }
 
 
-  detectPropChanged(key: string, nextProps: PolyProps) {
+  detectPropChanged(key: string, nextProps: EditorProps) {
+    console.log('key', key)
+    console.log('key value', this.props[key])
+    console.log('next key value', nextProps[key])
     return this.props[key] !== nextProps[key]
   }
 

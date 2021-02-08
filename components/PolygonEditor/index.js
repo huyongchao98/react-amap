@@ -77,7 +77,7 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
       return Promise.resolve(this.polygongonEditor)
     }
     return new Promise((resolve) => {
-      this.map.plugin(['AMap.PolyEditor'], () => {
+      this.map.plugin(['AMap.PolygonEditor'], () => {
         this.polygongonEditor = new window.AMap.PolygonEditor(
           this.map, this.polygon
         )

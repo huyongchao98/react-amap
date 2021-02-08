@@ -6,7 +6,8 @@ import log from '../utils/log'
 type EditorProps = {
   __map__: Object,
   __ele__: HTMLElement,
-  __polygon__: Object,
+  polygon: Object[],
+  targetIndex: number,
   active: boolean,
   events?: Object,
   onInstanceCreated?: Function
@@ -15,7 +16,8 @@ type EditorProps = {
 class PolygonEditor extends React.Component<EditorProps, {}> {
 
   map: Object
-  polygon: Object 
+  polygon: Object[]
+  targetIndex: number
   editorActive: boolean
   polygonEditor: Object
   setterMap: Object
@@ -24,7 +26,7 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
     super(props)
     if (typeof window !== 'undefined') {
       console.log('PolygonEditor')
-      if (!(props.__map__ && props.__polygon__)) {
+      if (!props.__map__) {
         log.warning('MAP_INSTANCE_REQUIRED')
       } else {
         const self = this
@@ -34,8 +36,9 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
           }
         }
         this.map = props.__map__
-        this.polygon = props.__polygon__
         this.editorActive = false
+        this.polygon = props.polygon
+        this.targetInde = props.targetIndex
         this.createEditorInstance().then(() => {
           this.props.onInstanceCreated && this.props.onInstanceCreated()
         })
@@ -80,12 +83,24 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
     return new Promise((resolve) => {
       this.map.plugin(['AMap.PolygonEditor'], () => {
         this.polygonEditor = new window.AMap.PolygonEditor(
-          this.map, this.polygon
+          this.map
         )
+        if (this.polygon != null && this.polygon.length > 0) {
+          this.polygonEditor.addAdsorbPolygons(this.polygon)
+        }
+        if (this.targetIndex >= 0 && this.targetIndex < this.polygon.length) {
+          this.polygonEditor.setTarget(this.polygon[this.targetIndex])
+        }
         resolve(this.polygonEditor)
       })
     })
   }
+
+
+  detectPropChanged(key: string, nextProps: PolyProps) {
+    return this.props[key] !== nextProps[key]
+  }
+
 
   render() {
     return null

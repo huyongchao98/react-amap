@@ -2,6 +2,7 @@
 import React from 'react'
 import withPropsReactive from '../utils/withPropsReactive'
 import log from '../utils/log'
+import Polygon from '../polygon'
 
 type EditorProps = {
   __map__: Object,
@@ -69,21 +70,21 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
     console.log('componentWillUpdate')
     if (this.polygonEditor != null) {
       const { polygon, targetIndex } = this.props
+   
+      const polygonComponents = polygon?.filter(item => item.length >= 3).map(item => {
+        console.log('item:', item)
+        return <Polygon path={item} />
+      })
+
       console.log('polygon:', polygon)
       console.log('targetIndex:', targetIndex)
-      if (polygon != null && polygon.length > 1) {
+      if (polygonComponents != null && polygonComponents.length > 1) {
         this.polygonEditor.addAdsorbPolygons(polygon)
       }
       if (targetIndex >= 0 && targetIndex < polygon.length) {
         const target = polygon[targetIndex]
-        if (target == null) {
-          return
-        }
-        const targetLength = target.getPath().length
-        if (targetLength === 0) {
+        if (target.length === 0) {
           this.polygonEditor.setTarget()
-        } else {
-          this.polygonEditor.setTarget(target)
         }
         this.polygonEditor.open()
       }

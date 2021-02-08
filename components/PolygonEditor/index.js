@@ -17,12 +17,13 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
   map: Object
   polygon: Object 
   editorActive: boolean
-  polygongonEditor: Object
+  polygonEditor: Object
   setterMap: Object
 
   constructor(props: EditorProps) {
     super(props)
     if (typeof window !== 'undefined') {
+      console.log('PolygonEditor')
       if (!(props.__map__ && props.__polygon__)) {
         log.warning('MAP_INSTANCE_REQUIRED')
       } else {
@@ -43,7 +44,7 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
   }
 
   get instance() {
-    return this.polygongonEditor
+    return this.polygonEditor
   }
 
   toggleActive(active: boolean) {
@@ -59,29 +60,29 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
   }
 
   activeEditor() {
-    if (this.polygongonEditor) {
+    if (this.polygonEditor) {
       this.editorActive = true
-      this.polygongonEditor.open()
+      this.polygonEditor.open()
     }
   }
 
   inactiveEditor() {
     this.editorActive = false
-    if (this.polygongonEditor) {
-      this.polygongonEditor.close()
+    if (this.polygonEditor) {
+      this.polygonEditor.close()
     }
   }
 
   createEditorInstance() {
-    if (this.polygongonEditor) {
-      return Promise.resolve(this.polygongonEditor)
+    if (this.polygonEditor) {
+      return Promise.resolve(this.polygonEditor)
     }
     return new Promise((resolve) => {
       this.map.plugin(['AMap.PolygonEditor'], () => {
-        this.polygongonEditor = new window.AMap.PolygonEditor(
+        this.polygonEditor = new window.AMap.PolygonEditor(
           this.map, this.polygon
         )
-        resolve(this.polygongonEditor)
+        resolve(this.polygonEditor)
       })
     })
   }

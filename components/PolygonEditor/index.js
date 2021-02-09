@@ -7,7 +7,8 @@ import Polygon from '../polygon'
 type EditorProps = {
   __map__: Object,
   __ele__: HTMLElement,
-  polygon: Object[],
+  polygonPath: Object[],
+  polygon: Element[],
   targetIndex: number,
   active: boolean,
   events?: Object,
@@ -18,8 +19,9 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
   map: Object
   targetIndex: number
   polygonEditor: Object
-  editorActive: boolean
   setterMap: Object
+  open: boolean
+  PolygonComponents: Object[]
 
   constructor(props: EditorProps) {
     super(props)
@@ -29,13 +31,7 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
         log.warning('MAP_INSTANCE_REQUIRED')
       } else {
         const self = this
-        this.setterMap = {
-          active(val) {
-            self.toggleActive(val)
-          }
-        }
         this.map = props.__map__
-        this.editorActive = false
         this.createEditorInstance().then(() => {
           this.props.onInstanceCreated && this.props.onInstanceCreated()
         })
@@ -47,66 +43,38 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
     return this.polygonEditor
   }
 
-  toggleActive(active: boolean) {
-    if (active) {
-      if (!this.editorActive) {
-        this.activeEditor()
-      }
-    } else {
-      if (this.editorActive) {
-        this.inactiveEditor()
-      }
-    }
-  }
-
-  activeEditor() {
-    if (this.polygonEditor) {
-      this.editorActive = true
-      this.polygonEditor.open()
-    }
-  }
-
   componentDidUpdate() {
     console.log('componentWillUpdate')
     if (this.polygonEditor != null) {
-      const { polygon, targetIndex } = this.props
-   
-      const polygonComponents = polygon?.filter((item, index) => item.length >= 3 || targetIndex !== index).map(item => {
-        console.log('item:', item)
-        return <Polygon path={item} />
-      })
+      const { polygonPath, polygon: polygonComponents, targetIndex } = this.props
 
-      console.log('polygon:', polygon)
-      console.log('targetIndex:', targetIndex)
 
-      let currentPolygonComponent
-      if (targetIndex >= 0 && polygon != null && polygon.length > targetIndex && polygon[targetIndex].length >= 3) {
-        currentPolygonComponent = <Polygon path={polygon[targetIndex]} />
+      if (targetIndex < 0) {
+         this.polygonEditor.close()
+         this.open = false
+         return
       }
-      if (polygonComponents != null && polygonComponents.length >= 1) {
+  
+      if (polygonComponents != null && polygonComponents.length > 1 && polygonComponents !== this.PolygonComponents) {
         let thePolygonComponents = polygonComponents
-        if (currentPolygonComponent != null) {
-          thePolygonComponents = [currentPolygonComponent, ...polygonComponents]
-        }
-        this.polygonEditor.addAdsorbPolygons(thePolygonComponents)
+        this.polygonEditor.setAdsorbPolygons(thePolygonComponents)
+        this.PolygonComponents = thePolygonComponents
       }
-      if (targetIndex >= 0 && targetIndex < polygon.length) {
-        const target = polygon[targetIndex]
-        if (target.length === 0) {
+      if (targetIndex >= 0 && targetIndex < polygonPath.length) {
+
+        const targetPolyGon = polygonPath[targetIndex]
+
+         if (targetIndex >= 0 && targetPolyGon.length === 0) {
+          this.polygonEditor.close()
           this.polygonEditor.setTarget()
-        } else if (currentPolygonComponent != null) {
-          this.polygonEditor.setTarget(currentPolygonComponent)
+        } else if (polygonComponents != null && targetIndex >= 0 && polygonComponents.length > targetIndex && !this.open) {
+          this.polygonEditor.close()
+          this.polygonEditor.setTarget(polygonComponents[targetIndex])
         }
         this.polygonEditor.open()
+        this.open = true
       }
 
-    }
-  }
-
-  inactiveEditor() {
-    this.editorActive = false
-    if (this.polygonEditor) {
-      this.polygonEditor.close()
     }
   }
 
@@ -126,9 +94,6 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
 
 
   detectPropChanged(key: string, nextProps: EditorProps) {
-    console.log('key', key)
-    console.log('key value', this.props[key])
-    console.log('next key value', nextProps[key])
     return this.props[key] !== nextProps[key]
   }
 

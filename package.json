@@ -6,8 +6,8 @@
   "types": "types/index.d.ts",
   "scripts": {
     "lint": "eslint . --quiet",
-    "browser-build": "rimraf dist && webpack && cross-env NODE_ENV=production webpack -p",
-    "browser-build_d": "rimraf dist && webpack && cross-env NODE_ENV=development webpack -d",
+    "browser-build": "rimraf dist && webpack && cross-env NODE_ENV=production webpack",
+    "browser-build_d": "rimraf dist && webpack && cross-env NODE_ENV=development webpack",
     "npm-build": "rimraf lib && babel components -d lib",
     "npm-build_dev": "rimraf lib && babel components --watch -d lib --source-maps inline",
     "buildAll": "npm run browser-build && npm run npm-build",
@@ -63,9 +63,9 @@
     "style-loader": "^0.23.1",
     "uglify-js": "^3.6.0",
     "url-loader": "^2.0.0",
-    "webpack": "^4.39.0",
-    "webpack-cli": "^3.3.11",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
     "cross-env": "^7.0.3",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.11.1"
   }
 }

@@ -9,6 +9,8 @@ type EditorProps = {
   polygonPath: Object[],
   polygon: Element[],
   targetIndex: number,
+  delIndex: number,
+  delComplete: Function,
   active: boolean,
   events?: Object,
   onInstanceCreated?: Function
@@ -45,7 +47,14 @@ class PolygonEditor extends React.Component<EditorProps, {}> {
   componentDidUpdate() {
     console.log('componentWillUpdate')
     if (this.polygonEditor != null) {
-      const { polygonPath, polygon: polygonComponents, targetIndex } = this.props
+      const { polygonPath, polygon: polygonComponents, targetIndex, delIndex, delComplete } = this.props
+
+      if (delIndex != null && this.PolygonComponents != null && this.PolygonComponents.length > delIndex) {
+        this.PolygonComponents[delIndex].remove()
+        if (delComplete != null) {
+          delComplete()
+        }
+      }
 
       if (targetIndex < 0) {
         this.polygonEditor.close()
